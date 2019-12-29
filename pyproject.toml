@@ -10,6 +10,7 @@ python = "^3.6"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.9"
+pytest = "^5.3.2"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.gendiff:main"
