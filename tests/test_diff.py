@@ -7,3 +7,10 @@ def test_float_json_file():
     second_file = 'tests/fixtures/json/second.json'
     res = FLOAT_RES
     assert res == generate_diff(first_file, second_file)
+
+
+def test_float_yaml_file():
+    first_file = 'tests/fixtures/yaml/after.yml'
+    second_file = 'tests/fixtures/yaml/before.yml'
+    res = FLOAT_RES
+    assert res == generate_diff(first_file, second_file)
