@@ -7,28 +7,28 @@ import yaml
 def get_data_file(path):
     if not os.path.isabs(path):
         path = os.path.join(os.getcwd(), path)
-    patch = Path('my_file.mp3').suffix
+    patch = Path(path).suffix
     if patch == '.json':
         return json.load(open(path))
     return yaml.load(open(path), Loader=yaml.Loader)
 
 
-def get_diff_data(first_data, second_data):
-    set_first = set(first_data.keys())
-    set_second = set(second_data.keys())
-    diff_left = set_first - set_second
-    diff_right = set_second - set_first
-    diff_intersection = set_first & set_second
-    data = list(diff_left) + list(diff_right) + list(diff_intersection)
-    data_dict = {}
-    for item in data:
-        if first_data.get(item) is None:
-            data_dict[("+", item)] = second_data[item]
-        elif first_data.get(item) == second_data.get(item):
-            data_dict[('', item)] = second_data[item]
-        elif second_data.get(item) is None:
-            data_dict[("-", item)] = first_data[item]
+def get_diff_data(d1, d2):
+    d1_keys = set(d1.keys())
+    d2_keys = set(d2.keys())
+    intersect_keys = d1_keys.intersection(d2_keys)
+    removed = d1_keys - d2_keys
+    added = d2_keys - d1_keys
+    modified_dict = \
+        {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
+    same = set(o for o in intersect_keys if d1[o] == d2[o])
+    modified = {}
+    for key in modified_dict:
+        value_1, value_2 = modified_dict[key]
+        if isinstance(value_1, dict) and isinstance(value_2, dict):
+            modified[key] = get_diff_data(value_1, value_2)
         else:
-            data_dict[("+", item)] = first_data[item]
-            data_dict[("-", item)] = second_data[item]
-    return data_dict
+            return {'add': added, 'removed': removed,
+                    'modified': modified_dict, 'same': same}
+    return {'add': added, 'removed': removed, 'modified': modified,
+            'same': same}

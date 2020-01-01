@@ -6,4 +6,3 @@ def generate_diff(first_file, second_file):
     second = get_data_file(second_file)
     data_diff = get_diff_data(first, second)
     return data_diff
-
