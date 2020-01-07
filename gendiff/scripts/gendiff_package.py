@@ -1,6 +1,6 @@
 import argparse
 
-from formatters.float import get_format
+from formatters.print_format import get_format
 from gendiff.gendiff import generate_diff
 
 
