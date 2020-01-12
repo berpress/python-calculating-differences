@@ -1,4 +1,4 @@
-def get_format(d1, d2, data):
+def get_text_diff(d1, d2, data):
     text = '{\n'
     for v in data['add']:
         text += get_print_data(v, d2[v], '+')
@@ -14,7 +14,7 @@ def get_format(d1, d2, data):
             text += 3 * ' '
             text += f'{v1}:\n'
             text += 3 * ' '
-            text += get_format(d1[v1], d2[v1], data['modified'][v1])
+            text += get_text_diff(d1[v1], d2[v1], data['modified'][v1])
         else:
             text += 3 * ' '
             text += get_print_data(v1, d2[v1], '+')
