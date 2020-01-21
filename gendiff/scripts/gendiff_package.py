@@ -15,7 +15,7 @@ def main():
     if args.format == 'plain':
         print(get_plain_diff(dict_1, dict_2, diff))
     else:
-        print(get_text_diff(dict_1, dict_2, diff))
+        print(get_text_diff(diff))
 
 
 if __name__ == '__main__':
