@@ -13,6 +13,26 @@ def get_data_file(path):
     return yaml.load(open(path), Loader=yaml.Loader)
 
 
+# def get_diff_data(d1, d2):
+#     d1_keys = set(d1.keys())
+#     d2_keys = set(d2.keys())
+#     intersect_keys = d1_keys.intersection(d2_keys)
+#     removed = d1_keys - d2_keys
+#     added = d2_keys - d1_keys
+#     modified_dict = \
+#         {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
+#     same = set(o for o in intersect_keys if d1[o] == d2[o])
+#     modified = {}
+#     for key in modified_dict:
+#         value_1, value_2 = modified_dict[key]
+#         if isinstance(value_1, dict) and isinstance(value_2, dict):
+#             modified[key] = get_diff_data(value_1, value_2)
+#         else:
+#             return {'add': added, 'removed': removed,
+#                     'modified': modified_dict, 'same': same}
+#     return {'add': added, 'removed': removed, 'modified': modified,
+#             'same': same}
+
 def get_diff_data(d1, d2):
     d1_keys = set(d1.keys())
     d2_keys = set(d2.keys())
@@ -22,13 +42,18 @@ def get_diff_data(d1, d2):
     modified_dict = \
         {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
     same = set(o for o in intersect_keys if d1[o] == d2[o])
-    modified = {}
+
+    diff = {}
+    for add in added:
+        diff[add] = ("add", d2[add])
+    for s in same:
+        diff[s] = ("same", d1[s])
+    for rem in removed:
+        diff[rem] = ("remove", d1[rem])
     for key in modified_dict:
         value_1, value_2 = modified_dict[key]
         if isinstance(value_1, dict) and isinstance(value_2, dict):
-            modified[key] = get_diff_data(value_1, value_2)
+            diff[key] = get_diff_data(value_1, value_2)
         else:
-            return {'add': added, 'removed': removed,
-                    'modified': modified_dict, 'same': same}
-    return {'add': added, 'removed': removed, 'modified': modified,
-            'same': same}
+            diff[key] = ('modified', value_1, value_2)
+    return diff

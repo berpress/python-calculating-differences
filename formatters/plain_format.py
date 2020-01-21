@@ -1,9 +1,11 @@
 def get_plain_diff(d1, d2, data):
     text = ''
     patch = ''
+    print(data)
     if len(data['add']) > 0:
         text_add = ""
         for item in data['add']:
+            patch += item
             text_add += "'{0}' was add with value:".format(item)
             if isinstance(d2[item], dict):
                 text_add += ' complex value'
@@ -30,8 +32,31 @@ def get_plain_diff(d1, d2, data):
     return text
 
 
-def get_patch_key(_dict, key):
-    pass
+# def print_tree(t, path=()):
+#     for k, v in t.items():
+#         new_path = path + (k,)
+#         if isinstance(v, dict):
+#             print_tree(v, path=new_path)
+#         else:
+#             return (
+#                 '{}: {}'.format(
+#                     '.'.join(new_path),
+#                     v,
+#                 )
+#             )
+
+def print_tree(t, path=()):
+    for k, v in t.items():
+        new_path = path + (k,)
+        if isinstance(v, dict):
+            print_tree(v, path=new_path)
+        else:
+            print(
+                '{}: {}'.format(
+                    '.'.join(new_path),
+                    v,
+                )
+            )
 
 # def get_print_data(data, d, description):
 #     text = ''
