@@ -13,7 +13,7 @@ def main():
     args = parser.parse_args()
     dict_1, dict_2, diff = generate_diff(args.first_file, args.second_file)
     if args.format == 'plain':
-        print(get_plain_diff(dict_1, dict_2, diff))
+        print(get_plain_diff(diff))
     else:
         print(get_text_diff(diff))
 

@@ -1,76 +1,30 @@
-def get_plain_diff(d1, d2, data):
-    text = ''
-    patch = ''
-    print(data)
-    if len(data['add']) > 0:
-        text_add = ""
-        for item in data['add']:
-            patch += item
-            text_add += "'{0}' was add with value:".format(item)
-            if isinstance(d2[item], dict):
-                text_add += ' complex value'
-            else:
-                text_add += " '{0}'".format(d2[item])
-            text += "Property {0} \n".format(text_add)
-            text_add = ''
-    if len(data['removed']) > 0:
-        text_add = ""
-        for item in data['removed']:
-            text_add += "'{0}' was removed".format(item)
-        text += "Property {0} \n".format(text_add)
-    if len(data['modified']) > 0:
-        text_add = ""
-        for key in data['modified']:
-            item = data['modified'][key]
-            patch += key
-            if isinstance(item, dict):
-                text_add += get_plain_diff(d1[key], d2[key], item)
-            else:
-                text_add += "Property '{0}' was changed.".format(patch)
-                text_add += ' From {0} to {1}'.format(item[0], item[1])
-        text += "{0} \n".format(text_add)
-    return text
+def get_plain_diff(data):
+    return get_diff(data)
 
 
-# def print_tree(t, path=()):
-#     for k, v in t.items():
-#         new_path = path + (k,)
-#         if isinstance(v, dict):
-#             print_tree(v, path=new_path)
-#         else:
-#             return (
-#                 '{}: {}'.format(
-#                     '.'.join(new_path),
-#                     v,
-#                 )
-#             )
-
-def print_tree(t, path=()):
+def get_diff(t, path=()):
+    text = ""
     for k, v in t.items():
         new_path = path + (k,)
         if isinstance(v, dict):
-            print_tree(v, path=new_path)
+            text += get_diff(v, path=new_path)
         else:
-            print(
-                '{}: {}'.format(
-                    '.'.join(new_path),
-                    v,
-                )
-            )
-
-# def get_print_data(data, d, description):
-#     text = ''
-#     if isinstance(data['add'], dict):
-#         pass
-#     else:
-#         for item in data['add']:
-#             text += " '{0}' {1}".format(item, description)
-#             if isinstance(d[item], dict):
-#                 text += 'complex value'
-#             else:
-#                 text += " '{0}'".format(d[item])
-#     text += "\n"
-#     return text
+            if v[0] != 'same':
+                path_str = '{}'.format('.'.join(new_path))
+                text += "Property {}".format(path_str)
+                if v[0] == 'add':
+                    text += " was added with value: "
+                    if isinstance(v[1], dict):
+                        text += "'complex value'"
+                    else:
+                        text += f"{v[1]}"
+                if v[0] == 'remove':
+                    text += " was removed"
+                if v[0] == 'modified':
+                    text += " was changed. From '{}' to '{}'".format(v[1], v[2])
+                    pass
+                text += '\n'
+    return text
 
 
 
