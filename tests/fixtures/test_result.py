@@ -1,8 +1,5 @@
-FLOAT_RES = (
-    {'add': {'verbose'}, 'removed': {'proxy'},
-     'modified': {'timeout': (50, 20)}, 'same': {'host'}}
-)
-
+FLOAT_RES = 'Property verbose was added with value: True Property proxy was ' \
+            'removed Property timeout was changed. From \'50\' to \'20\''
 NOT_FLOAT_RES = (
     {'add': {'group3'}, 'removed': {'group2'}, 'modified': {
         'group1': {'add': set(), 'removed': set(),

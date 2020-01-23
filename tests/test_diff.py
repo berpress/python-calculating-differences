@@ -1,11 +1,13 @@
+from formatters.plain_format import get_plain_diff
 from gendiff.gendiff import generate_diff
 from tests.fixtures.test_result import FLOAT_RES, NOT_FLOAT_RES, NOT_FLOAT_YAML
 
 
 def test_float_json_file():
-    first_file = 'tests/fixtures/json/first.json'
-    second_file = 'tests/fixtures/json/second.json'
-    assert FLOAT_RES == generate_diff(first_file, second_file)[2]
+    first_file = 'fixtures/json/first.json'
+    second_file = 'fixtures/json/second.json'
+    diff = generate_diff(first_file, second_file)[2]
+    assert FLOAT_RES == get_plain_diff(diff)
 
 
 def test_float_yaml_file():
