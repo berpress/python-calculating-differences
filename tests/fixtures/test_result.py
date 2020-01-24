@@ -1,5 +1,10 @@
-FLOAT_RES = 'Property verbose was added with value: True Property proxy was ' \
-            'removed Property timeout was changed. From \'50\' to \'20\''
+FLOAT_RES = "Property group3 was added with value: 'complex value\nProperty " \
+            "group2 was removed\nProperty group1.baz was changed. From 'bas' " \
+            "to 'bars'\nProperty common.setting4 was added with value: blah " \
+            "blah\nProperty common.setting5 was added with value: " \
+            "'complex value'\nProperty common.setting6 was removed\nProperty " \
+            "common.setting2 was removed"
+
 NOT_FLOAT_RES = (
     {'add': {'group3'}, 'removed': {'group2'}, 'modified': {
         'group1': {'add': set(), 'removed': set(),

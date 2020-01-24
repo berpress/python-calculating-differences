@@ -11,12 +11,14 @@ def main():
     parser.add_argument('second_file', type=str)
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
-    dict_1, dict_2, diff = generate_diff(args.first_file, args.second_file)
+    diff = generate_diff(args.first_file, args.second_file)
     if args.format == 'plain':
-        tt = get_plain_diff(diff)
         print(get_plain_diff(diff))
     else:
         tt = get_text_diff(diff)
+        f = open("text.txt", "w")
+        f.write(tt)
+        f.close()
         print(get_text_diff(diff))
 
 

@@ -1,4 +1,8 @@
 def get_plain_diff(data):
+    tt = get_diff(data)
+    f = open("plain-h.txt", "w")
+    f.write(tt)
+    f.close()
     return get_diff(data)
 
 
@@ -21,8 +25,8 @@ def get_diff(t, path=()):
                 if v[0] == 'remove':
                     text += " was removed"
                 if v[0] == 'modified':
-                    text += " was changed. From '{}' to '{}'".format(v[1], v[2])
-                    pass
+                    text += " was changed. From '{}' to '{}'".format(v[1],
+                                                                     v[2])
                 text += '\n'
     return text
 

@@ -10,23 +10,23 @@ def get_text_diff(diff):
         else:
             diff_property = item[0]
             if diff_property == 'add':
-                text += get_text_dict("+", key, item[1], space)
+                text += get_diff_format("+", key, item[1], space)
             elif diff_property == 'same':
-                text += get_text_dict(" ", key, item[1], space)
+                text += get_diff_format(" ", key, item[1], space)
             elif diff_property == 'remove':
-                text += get_text_dict("-", key, item[1], space)
+                text += get_diff_format("-", key, item[1], space)
             elif diff_property == 'modified':
                 before, after = item[1:]
-                text += f"{space} +{key}: {before}"
+                text += f"{space}+{key}: {before}"
                 text += '\n'
-                text += f"{space} -{key}: {after}"
+                text += f"{space}-{key}: {after}"
                 text += '\n'
-            text += space
+            # text += space
     text += '}\n'
     return text
 
 
-def get_text_dict(status, key, item, space):
+def get_diff_format(status, key, item, space):
     if isinstance(item, dict):
         k = list(item.keys())[0]
         text = "{0}{1}{2}: ".format(space, status, key)
