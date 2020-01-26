@@ -1,12 +1,22 @@
-def get_text_diff(diff):
-    text = '{\n'
-    space_count = 2
+def get_dict_diff(diff):
+    text = "{"
+    text += get_diff(diff)
+    text += "}"
+    return text
+
+
+def get_diff(diff,  space=" "):
+    text = ''
+    text += "\n"
     for key, value in diff.items():
         item = diff[key]
-        space = " " * space_count
         if isinstance(item, dict):
             text += "{0}{1}: ".format(space, key)
-            text += get_text_diff(item)
+            text += "{"
+            text += get_diff(item, space * 2)
+            text += space
+            text += "}"
+            text += '\n'
         else:
             diff_property = item[0]
             if diff_property == 'add':
@@ -21,8 +31,6 @@ def get_text_diff(diff):
                 text += '\n'
                 text += f"{space}-{key}: {after}"
                 text += '\n'
-            # text += space
-    text += '}\n'
     return text
 
 
