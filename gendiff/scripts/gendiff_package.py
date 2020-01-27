@@ -13,13 +13,7 @@ def main():
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file)
     if args.format == 'plain':
-        tt = get_plain_diff(diff)
-        f = open("../../tests/fixtures/json/json_result/flat_text_diff.txt",
-                 "w")
-        f.write(tt)
-        f.close()
         print(get_plain_diff(diff))
-
     else:
         print(get_dict_diff(diff))
 

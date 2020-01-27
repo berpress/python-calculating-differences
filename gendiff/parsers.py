@@ -22,7 +22,6 @@ def get_diff_data(d1, d2):
     modified_dict = \
         {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
     same = set(o for o in intersect_keys if d1[o] == d2[o])
-
     diff = {}
     for add in added:
         diff[add] = ("add", d2[add])
@@ -36,4 +35,4 @@ def get_diff_data(d1, d2):
             diff[key] = get_diff_data(value_1, value_2)
         else:
             diff[key] = ('modified', value_1, value_2)
-    return diff
+    return dict(sorted(diff.items()))
