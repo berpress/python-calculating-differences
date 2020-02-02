@@ -1,0 +1,1 @@
+{"common": {"setting1": ["same", "Value 1"], "setting2": ["remove", "200"], "setting3": ["same", true], "setting4": ["add", "blah blah"], "setting5": ["add", {"key5": "value5"}], "setting6": ["remove", {"key": "value"}]}, "group1": {"baz": ["modified", "bas", "bars"], "foo": ["same", "bar"]}, "group2": ["remove", {"abc": "12345"}], "group3": ["add", {"fee": "100500"}]}

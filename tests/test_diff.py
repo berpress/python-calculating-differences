@@ -1,3 +1,4 @@
+from formatters.json_format import get_json_diff
 from formatters.plain_format import get_plain_diff
 from formatters.print_format import get_dict_diff
 from gendiff.gendiff import generate_diff
@@ -78,3 +79,11 @@ def test_nested_text_yaml_file():
     data_file = f.read()
     assert data_file == get_plain_diff(diff)
 
+
+def test_nested_json_file():
+    first_file = os.path.join(TEST_FILES_JSON, "h_first.json")
+    second_file = os.path.join(TEST_FILES_JSON, "h_second.json")
+    diff = generate_diff(first_file, second_file)
+    f = open('tests/fixtures/json/print_json/json_nested')
+    data_file = f.read()
+    assert data_file == get_json_diff(diff)

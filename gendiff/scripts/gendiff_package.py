@@ -1,5 +1,7 @@
 import argparse
+import pprint
 
+from formatters.json_format import get_json_diff
 from formatters.plain_format import get_plain_diff
 from formatters.print_format import get_dict_diff
 from gendiff.gendiff import generate_diff
@@ -14,6 +16,8 @@ def main():
     diff = generate_diff(args.first_file, args.second_file)
     if args.format == 'plain':
         print(get_plain_diff(diff))
+    elif args.format == 'json':
+        pprint.pprint(get_json_diff(diff))
     else:
         print(get_dict_diff(diff))
 
