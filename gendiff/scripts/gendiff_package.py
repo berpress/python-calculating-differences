@@ -3,7 +3,7 @@ import pprint
 
 from gendiff.formatters.json_format import get_json_diff
 from gendiff.formatters.plain_format import get_plain_diff
-from gendiff.formatters.print_format import get_dict_diff
+from gendiff.formatters.json_print_format import get_dict_diff
 from gendiff.gendiff import generate_diff
 
 

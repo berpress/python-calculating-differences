@@ -1,8 +1,4 @@
 def get_plain_diff(data):
-    tt = get_diff(data)
-    f = open("plain-h.txt", "w")
-    f.write(tt)
-    f.close()
     return get_diff(data)
 
 

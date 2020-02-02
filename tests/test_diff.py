@@ -1,6 +1,6 @@
 from gendiff.formatters.json_format import get_json_diff
 from gendiff.formatters.plain_format import get_plain_diff
-from gendiff.formatters.print_format import get_dict_diff
+from gendiff.formatters.json_print_format import get_dict_diff
 from gendiff.gendiff import generate_diff
 import os
 
@@ -27,8 +27,8 @@ def test_text_json_file():
 
 
 def test_nested_flat_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "h_first.json")
-    second_file = os.path.join(TEST_FILES_JSON, "h_second.json")
+    first_file = os.path.join(TEST_FILES_JSON, "first_nested.json")
+    second_file = os.path.join(TEST_FILES_JSON, "second_nested.json")
     diff = generate_diff(first_file, second_file)
     f = open('tests/fixtures/json/json_result/flat_nested_diff.txt')
     data_file = f.read()
@@ -36,8 +36,8 @@ def test_nested_flat_json_file():
 
 
 def test_nested_text_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "h_first.json")
-    second_file = os.path.join(TEST_FILES_JSON, "h_second.json")
+    first_file = os.path.join(TEST_FILES_JSON, "first_nested.json")
+    second_file = os.path.join(TEST_FILES_JSON, "second_nested.json")
     diff = generate_diff(first_file, second_file)
     f = open('tests/fixtures/json/json_result/flat_text_nested_diff.txt')
     data_file = f.read()
@@ -81,8 +81,8 @@ def test_nested_text_yaml_file():
 
 
 def test_nested_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "h_first.json")
-    second_file = os.path.join(TEST_FILES_JSON, "h_second.json")
+    first_file = os.path.join(TEST_FILES_JSON, "first_nested.json")
+    second_file = os.path.join(TEST_FILES_JSON, "second_nested.json")
     diff = generate_diff(first_file, second_file)
     f = open('tests/fixtures/json/print_json/json_nested')
     data_file = f.read()
