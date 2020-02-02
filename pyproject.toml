@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "litovsky-get-diff-files"
-version = "0.1.1"
+version = "0.1.2"
 description = "Test Project"
 authors = ["Alexander <berpress@gmail.com>"]
 packages = [{ include = "gendiff" }]
@@ -14,7 +14,7 @@ flake8 = "^3.7.9"
 pytest = "^5.3.2"
 
 [tool.poetry.scripts]
-gendiff = "gendiff.gendiff:main"
+gendiff = "gendiff.scripts.gendiff_package:main"
 
 [build-system]
 requires = ["poetry>=0.12"]
