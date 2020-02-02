@@ -6,7 +6,7 @@
 
 1. Установка 
 ``` sh
-python3 -m pip install --user --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple litovsky-get-diff-file
+python3 -m pip install --user --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple litovsky-get-diff-files
 
 ```
 2. Использование
@@ -49,3 +49,8 @@ python3 -m pip install --user --index-url https://test.pypi.org/simple --extra-i
     ('{"host": ["same", "hexlet.io"], "proxy": ["remove", "123.234.53.22"], '
     '"timeout": ["modified", 50, 20], "verbose": ["add", true]}')
     ```
+    
+    
+     Пример 
+     
+     [![asciicast](https://asciinema.org/a/O1mS1n0I0oqJHYk8SIpoTgSBA.svg)](https://asciinema.org/a/O1mS1n0I0oqJHYk8SIpoTgSBA)
