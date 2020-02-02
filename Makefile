@@ -7,3 +7,9 @@ lint:
 
 pytest:
 	@poetry run pytest
+
+build:
+	@poetry build
+
+publish:
+	@poetry publish -r pypi_test

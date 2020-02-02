@@ -1,0 +1,2 @@
+Property test1.a.a1.a2.b3 was changed. From '0' to '4'
+Property test1.a.a1.a2.c3 was changed. From '2' to '0'
