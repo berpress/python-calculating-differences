@@ -1,9 +1,9 @@
 import argparse
 import pprint
 
-from formatters.json_format import get_json_diff
-from formatters.plain_format import get_plain_diff
-from formatters.print_format import get_dict_diff
+from gendiff.formatters.json_format import get_json_diff
+from gendiff.formatters.plain_format import get_plain_diff
+from gendiff.formatters.print_format import get_dict_diff
 from gendiff.gendiff import generate_diff
 
 
