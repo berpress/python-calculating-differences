@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 import argparse
-import pprint
 
 from gendiff.formatters.json_format import get_json_diff
 from gendiff.formatters.plain_format import get_plain_diff
