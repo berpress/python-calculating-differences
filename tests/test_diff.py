@@ -1,89 +1,86 @@
+import pytest
+
 from gendiff.formatters.json_format import get_json_diff
 from gendiff.formatters.plain_format import get_plain_diff
 from gendiff.formatters.json_print_format import get_dict_diff
 from gendiff.gendiff import generate_diff
 import os
 
-TEST_FILES_JSON = 'tests/fixtures/json/json_file/'
-TEST_FILES_YAML = 'tests/fixtures/yaml/yaml_file/'
+TEST_FILES = 'tests/fixtures/files/'
+RESULT_FILE = 'tests/fixtures/results/'
 
 
-def test_flat_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "first.json")
-    second_file = os.path.join(TEST_FILES_JSON, "second.json")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/json/json_result/flat_diff.txt')
-    data_file = f.read()
-    assert data_file == get_dict_diff(diff)
+@pytest.mark.parametrize('file_type', [
+    'json',
+    'yml',
+])
+def test_flat_diff(file_type):
+    file_first = f'first.{file_type}'
+    file_second = f'second.{file_type}'
+    first_file_path = os.path.join(TEST_FILES, file_first)
+    second_file_path = os.path.join(TEST_FILES, file_second)
+    diff = generate_diff(first_file_path, second_file_path)
+    with open(os.path.join(RESULT_FILE, "flat_diff.txt")) as f:
+        data_file = f.read()
+    assert data_file == get_dict_diff(diff), "Данные не совпадают"
 
 
-def test_text_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "first.json")
-    second_file = os.path.join(TEST_FILES_JSON, "second.json")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/json/json_result/flat_text_diff.txt')
-    data_file = f.read()
-    assert data_file == get_plain_diff(diff)
+@pytest.mark.parametrize('file_type', [
+    'json',
+    'yml',
+])
+def test_flat_text_diff(file_type):
+    file_first = f'first.{file_type}'
+    file_second = f'second.{file_type}'
+    first_file_path = os.path.join(TEST_FILES, file_first)
+    second_file_path = os.path.join(TEST_FILES, file_second)
+    diff = generate_diff(first_file_path, second_file_path)
+    with open(os.path.join(RESULT_FILE, "flat_text_diff.txt")) as f:
+        data_file = f.read()
+    assert data_file == get_plain_diff(diff), "Данные не совпадают"
 
 
-def test_nested_flat_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "first_nested.json")
-    second_file = os.path.join(TEST_FILES_JSON, "second_nested.json")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/json/json_result/flat_nested_diff.txt')
-    data_file = f.read()
-    assert data_file == get_dict_diff(diff)
+@pytest.mark.parametrize('file_type', [
+    'json',
+    'yml',
+])
+def test_nested_flat_file(file_type):
+    file_first = f'first_nested.{file_type}'
+    file_second = f'second_nested.{file_type}'
+    first_file_path = os.path.join(TEST_FILES, file_first)
+    second_file_path = os.path.join(TEST_FILES, file_second)
+    diff = generate_diff(first_file_path, second_file_path)
+    with open(os.path.join(RESULT_FILE, "flat_nested_diff.txt")) as f:
+        data_file = f.read()
+    assert data_file == get_dict_diff(diff), "Данные не совпадают"
 
 
-def test_nested_text_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "first_nested.json")
-    second_file = os.path.join(TEST_FILES_JSON, "second_nested.json")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/json/json_result/flat_text_nested_diff.txt')
-    data_file = f.read()
-    assert data_file == get_plain_diff(diff)
+@pytest.mark.parametrize('file_type', [
+    'json',
+    'yml',
+])
+def test_nested_text_flat_file(file_type):
+    file_first = f'first_nested.{file_type}'
+    file_second = f'second_nested.{file_type}'
+    first_file_path = os.path.join(TEST_FILES, file_first)
+    second_file_path = os.path.join(TEST_FILES, file_second)
+    diff = generate_diff(first_file_path, second_file_path)
+    with open(os.path.join(RESULT_FILE, "flat_text_nested_diff.txt")) as f:
+        data_file = f.read()
+    assert data_file == get_plain_diff(diff), "Данные не совпадают"
 
 
-def test_flat_yaml_file():
-    first_file = os.path.join(TEST_FILES_YAML, "after.yml")
-    second_file = os.path.join(TEST_FILES_YAML, "before.yml")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/yaml/yaml_result/flat_diff.txt')
-    data_file = f.read()
-    assert data_file == get_dict_diff(diff)
+@pytest.mark.parametrize('file_type', [
+    'json',
+    'yml',
+])
+def test_nested_json_file(file_type):
+    file_first = f'first_nested.{file_type}'
+    file_second = f'second_nested.{file_type}'
+    first_file_path = os.path.join(TEST_FILES, file_first)
+    second_file_path = os.path.join(TEST_FILES, file_second)
+    diff = generate_diff(first_file_path, second_file_path)
+    with open(os.path.join(RESULT_FILE, "json_nested")) as f:
+        data_file = f.read()
+    assert data_file == get_json_diff(diff), "Данные не совпадают"
 
-
-def test_nested_flat_yaml_file():
-    first_file = os.path.join(TEST_FILES_YAML, "after_nested.yml")
-    second_file = os.path.join(TEST_FILES_YAML, "before_nested.yml")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/yaml/yaml_result/flat_nested_diff.txt')
-    data_file = f.read()
-    assert data_file == get_dict_diff(diff)
-
-
-def test_text_yaml_file():
-    first_file = os.path.join(TEST_FILES_YAML, "after.yml")
-    second_file = os.path.join(TEST_FILES_YAML, "before.yml")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/yaml/yaml_result/flat_text_diff.txt')
-    data_file = f.read()
-    assert data_file == get_plain_diff(diff)
-
-
-def test_nested_text_yaml_file():
-    first_file = os.path.join(TEST_FILES_YAML, "after_nested.yml")
-    second_file = os.path.join(TEST_FILES_YAML, "before_nested.yml")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/yaml/yaml_result/flat_text_nested_diff.txt')
-    data_file = f.read()
-    assert data_file == get_plain_diff(diff)
-
-
-def test_nested_json_file():
-    first_file = os.path.join(TEST_FILES_JSON, "first_nested.json")
-    second_file = os.path.join(TEST_FILES_JSON, "second_nested.json")
-    diff = generate_diff(first_file, second_file)
-    f = open('tests/fixtures/json/print_json/json_nested')
-    data_file = f.read()
-    assert data_file == get_json_diff(diff)
