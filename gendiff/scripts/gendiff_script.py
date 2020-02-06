@@ -14,12 +14,15 @@ def main():
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
     diff = generate_diff(args.first_file, args.second_file)
-    if args.format == 'plain':
+    _type = args.format
+    if _type == 'plain':
         print(get_plain_diff(diff))
-    elif args.format == 'json':
+    elif _type == 'json':
         print(get_json_diff(diff))
-    else:
+    elif _type is None:
         print(get_dict_diff(diff))
+    else:
+        raise Exception("Invalid format, run --help!")
 
 
 if __name__ == '__main__':

@@ -1,16 +1,18 @@
 import json
 import os
-from pathlib import Path
 import yaml
 
 
 def get_data_file(path):
     if not os.path.isabs(path):
         path = os.path.join(os.getcwd(), path)
-    patch = Path(path).suffix
-    if patch == '.json':
+    _, file_type = os.path.splitext(path)
+    if file_type == '.json':
         return json.load(open(path))
-    return yaml.load(open(path), Loader=yaml.Loader)
+    elif file_type == '.yml':
+        return yaml.load(open(path), Loader=yaml.Loader)
+    else:
+        raise Exception("Invalid format, run --help!")
 
 
 def get_diff_data(d1, d2):
