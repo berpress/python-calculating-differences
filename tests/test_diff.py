@@ -15,10 +15,8 @@ RESULT_FILE = 'tests/fixtures/results/'
     'yml',
 ])
 def test_flat_diff(file_type):
-    file_first = f'first.{file_type}'
-    file_second = f'second.{file_type}'
-    first_file_path = os.path.join(TEST_FILES, file_first)
-    second_file_path = os.path.join(TEST_FILES, file_second)
+    first_file_path = os.path.join(TEST_FILES, f'first.{file_type}')
+    second_file_path = os.path.join(TEST_FILES, f'second.{file_type}')
     diff = generate_diff(first_file_path, second_file_path)
     with open(os.path.join(RESULT_FILE, "flat_diff.txt")) as f:
         data_file = f.read()
@@ -30,10 +28,8 @@ def test_flat_diff(file_type):
     'yml',
 ])
 def test_flat_text_diff(file_type):
-    file_first = f'first.{file_type}'
-    file_second = f'second.{file_type}'
-    first_file_path = os.path.join(TEST_FILES, file_first)
-    second_file_path = os.path.join(TEST_FILES, file_second)
+    first_file_path = os.path.join(TEST_FILES, f'first.{file_type}')
+    second_file_path = os.path.join(TEST_FILES, f'second.{file_type}')
     diff = generate_diff(first_file_path, second_file_path)
     with open(os.path.join(RESULT_FILE, "flat_text_diff.txt")) as f:
         data_file = f.read()
@@ -45,10 +41,8 @@ def test_flat_text_diff(file_type):
     'yml',
 ])
 def test_nested_flat_file(file_type):
-    file_first = f'first_nested.{file_type}'
-    file_second = f'second_nested.{file_type}'
-    first_file_path = os.path.join(TEST_FILES, file_first)
-    second_file_path = os.path.join(TEST_FILES, file_second)
+    first_file_path = os.path.join(TEST_FILES, f'first_nested.{file_type}')
+    second_file_path = os.path.join(TEST_FILES, f'second_nested.{file_type}')
     diff = generate_diff(first_file_path, second_file_path)
     with open(os.path.join(RESULT_FILE, "flat_nested_diff.txt")) as f:
         data_file = f.read()
@@ -60,10 +54,8 @@ def test_nested_flat_file(file_type):
     'yml',
 ])
 def test_nested_text_flat_file(file_type):
-    file_first = f'first_nested.{file_type}'
-    file_second = f'second_nested.{file_type}'
-    first_file_path = os.path.join(TEST_FILES, file_first)
-    second_file_path = os.path.join(TEST_FILES, file_second)
+    first_file_path = os.path.join(TEST_FILES, f'first_nested.{file_type}')
+    second_file_path = os.path.join(TEST_FILES, f'second_nested.{file_type}')
     diff = generate_diff(first_file_path, second_file_path)
     with open(os.path.join(RESULT_FILE, "flat_text_nested_diff.txt")) as f:
         data_file = f.read()
@@ -75,12 +67,9 @@ def test_nested_text_flat_file(file_type):
     'yml',
 ])
 def test_nested_json_file(file_type):
-    file_first = f'first_nested.{file_type}'
-    file_second = f'second_nested.{file_type}'
-    first_file_path = os.path.join(TEST_FILES, file_first)
-    second_file_path = os.path.join(TEST_FILES, file_second)
+    first_file_path = os.path.join(TEST_FILES, f'first_nested.{file_type}')
+    second_file_path = os.path.join(TEST_FILES, f'second_nested.{file_type}')
     diff = generate_diff(first_file_path, second_file_path)
     with open(os.path.join(RESULT_FILE, "json_nested")) as f:
         data_file = f.read()
     assert data_file == get_json_diff(diff), "Данные не совпадают"
-
