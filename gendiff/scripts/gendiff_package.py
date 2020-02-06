@@ -17,7 +17,7 @@ def main():
     if args.format == 'plain':
         print(get_plain_diff(diff))
     elif args.format == 'json':
-        pprint.pprint(get_json_diff(diff))
+        print(get_json_diff(diff))
     else:
         print(get_dict_diff(diff))
 

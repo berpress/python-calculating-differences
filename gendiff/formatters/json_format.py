@@ -1,5 +1,6 @@
-import json
+import pprint
 
 
 def get_json_diff(diff):
-    return json.dumps(diff)
+    data = pprint.pformat(diff)
+    return data
