@@ -5,32 +5,38 @@ def get_dict_diff(diff):
     return text
 
 
-def get_diff(diff,  space=" "):
-    diff_text = ''
-    diff_text += "\n"
+ADDED = '+'
+SAME = ' '
+REMOVED = '-'
+
+
+def get_diff(diff, space=" "):
+    diff_text = '{0}{1}'.format("", '\n')
     for key, value in diff.items():
         item = diff[key]
         if isinstance(item, dict):
-            diff_text += "{0}{1}: ".format(space, key)
-            diff_text += "{"
-            diff_text += get_diff(item, space * 2)
-            diff_text += space
-            diff_text += "}"
-            diff_text += '\n'
+            diff_lines = get_diff(item, space * 2)
+            diff_text = \
+                '{0}{1}{2}: {{{3}{4}}}{5}'.format(
+                    diff_text, space, key, diff_lines, space, '\n')
         else:
             diff_property = item[0]
             if diff_property == 'add':
-                diff_text += get_diff_format("+", key, item[1], space)
+                add_lines = get_diff_format(ADDED, key, item[1], space)
+                diff_text = '{0}{1}'.format(diff_text, add_lines)
             elif diff_property == 'same':
-                diff_text += get_diff_format(" ", key, item[1], space)
+                same_lines = get_diff_format(SAME, key, item[1], space)
+                diff_text = '{}{}'.format(diff_text, same_lines)
             elif diff_property == 'remove':
-                diff_text += get_diff_format("-", key, item[1], space)
+                remove_lines = get_diff_format(REMOVED, key, item[1], space)
+                diff_text = '{0}{1}'.format(diff_text, remove_lines)
             elif diff_property == 'modified':
                 before, after = item[1:]
-                diff_text += f"{space}+{key}: {before}"
-                diff_text += '\n'
-                diff_text += f"{space}-{key}: {after}"
-                diff_text += '\n'
+                before_lines = f"{space}+{key}: {before}"
+                after_lines = f"{space}-{key}: {after}"
+                diff_text = '{0}{1}{2}{3}{4}'.format(diff_text,
+                                                     before_lines,
+                                                     '\n', after_lines, '\n')
     return diff_text
 
 

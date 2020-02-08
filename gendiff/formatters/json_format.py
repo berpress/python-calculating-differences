@@ -2,5 +2,5 @@ import pprint
 
 
 def get_json_diff(diff):
-    data = pprint.pformat(diff)
-    return data
+    result = pprint.pformat(diff)
+    return result
