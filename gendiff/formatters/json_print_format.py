@@ -11,7 +11,7 @@ REMOVED = '-'
 
 
 def get_diff(diff, space=" "):
-    diff_text = '{0}{1}'.format("", '\n')
+    diff_text = '\n'
     for key, value in diff.items():
         item = diff[key]
         if isinstance(item, dict):

@@ -43,4 +43,5 @@ def get_diff_data(d1, d2):
             diff[key] = get_diff_data(value_1, value_2)
         else:
             diff[key] = ('modified', value_1, value_2)
-    return dict(sorted(diff.items()))
+    # return dict(sorted(diff.items()))
+    return diff
