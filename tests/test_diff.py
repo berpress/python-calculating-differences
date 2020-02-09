@@ -1,5 +1,4 @@
 import pytest
-from collections import OrderedDict
 
 from gendiff.formatters.json_format import get_json_diff
 from gendiff.formatters.plain_format import get_plain_diff
@@ -24,7 +23,7 @@ def test_flat_diff(file_type):
     first_file_path = os.path.join(TEST_FILES, f'first.{file_type}')
     second_file_path = os.path.join(TEST_FILES, f'second.{file_type}')
     diff = generate_diff(first_file_path, second_file_path)
-    diff = OrderedDict(sorted(diff.items()))
+    diff = sort_dict(diff)
     with open(os.path.join(RESULT_FILE, "flat_diff.txt")) as f:
         data_file = f.read()
     assert data_file == get_dict_diff(diff), "Данные не совпадают"
