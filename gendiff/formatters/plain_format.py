@@ -3,11 +3,11 @@ def get_plain_diff(data):
 
 
 def get_diff(t, path=()):
-    text = ""
+    diff_list_text = []
     for k, v in t.items():
         new_path = path + (k,)
         if isinstance(v, dict):
-            text = '{0}{1}'.format(text, get_diff(v, path=new_path))
+            diff_list_text.append(get_diff(v, path=new_path))
         else:
             if len(v) == 2:
                 status, value = v
@@ -15,20 +15,20 @@ def get_diff(t, path=()):
                 status, value, value_2 = v
             if status != 'same':
                 path_str = '{}'.format('.'.join(new_path))
-                text += "Property {}".format(path_str)
+                diff_list_text.append("Property {}".format(path_str))
                 if status == 'add':
-                    text += " was added with value: "
+                    diff_list_text.append(" was added with value: ")
                     if isinstance(value, dict):
-                        text += "'complex value'"
+                        diff_list_text.append( "'complex value'")
                     else:
-                        text += f"{value}"
+                        diff_list_text.append(str(value))
                 if status == 'remove':
-                    text += " was removed"
+                    diff_list_text.append( " was removed")
                 if status == 'modified':
-                    text += " was changed. From '{}' to '{}'".format(value,
-                                                                     value_2)
-                text += '\n'
-    return text
+                    diff_list_text.append(" was changed. From '{}' to '{}'"
+                                     .format(value, value_2))
+                diff_list_text.append('\n')
+    return "".join(diff_list_text)
 
 
 
