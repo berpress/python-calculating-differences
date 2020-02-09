@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "litovsky-get-diff-files"
-version = "0.1.17"
+version = "0.1.22"
 description = "Test Project"
 authors = ["Alexander <berpress@gmail.com>"]
 packages = [{ include = "gendiff" }]
